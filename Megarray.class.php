@@ -11,9 +11,9 @@
 		private $items 		= array();
 		private $length 	= 0;
 		
-		public function __construct()
+		public function __construct($arr = false)
 		{
-			echo 'I am alive!';
+			
 		}
 		
 		// Implement countable:
@@ -30,7 +30,7 @@
 		public function offsetSet($offset, $value)	{	$this->items[$offset] = $value;												}
 		public function offsetExists($offset)		{	return isset($this->items[$offset]);										}
 		public function offsetUnset($offset)		{	unset($this->items[$offset]);												}
-		public function offsetGet($offset)			{	return isset($this->offsetExists($offset))? $this->items[$offset] : null;	}
+		public function offsetGet($offset)			{	return isset($this->items[$offset])? $this->items[$offset] : null;			}
 		
 		
 	}
