@@ -119,7 +119,11 @@
 		
 		public function offsetUnset($offset)		
 		{	
-			unset($this->items[$offset]);			
+			$keypos = $this->get_key_index($offset);
+			unset($this->items[$keypos]);
+			unset($this->keys[$keypos]);
+			unset($this->original[$offset]);
+			$this->length --;
 		}
 		
 		
