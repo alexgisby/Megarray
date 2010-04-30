@@ -112,8 +112,15 @@
 			return null;
 		}
 		
-		public function offsetExists($offset)		{	return isset($this->items[$offset]);										}
-		public function offsetUnset($offset)		{	unset($this->items[$offset]);												}
+		public function offsetExists($offset)
+		{
+			return $this->key_exists($offset);	
+		}
+		
+		public function offsetUnset($offset)		
+		{	
+			unset($this->items[$offset]);			
+		}
 		
 		
 		private function key_search($search)
