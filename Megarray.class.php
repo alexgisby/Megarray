@@ -69,6 +69,10 @@
 			if($this->key_exists($offset))
 			{
 				// Key already exists so we're overwriting. Don't change length or anything.
+				$keypos = $this->get_key_index($offset);
+				unset($this->items[$keypos]);			// Be tidy, don't leak memory.
+				$this->items[$keypos] 		= $value;
+				$this->original[$offset]	= $value;
 			}
 			else
 			{
@@ -111,13 +115,14 @@
 		public function offsetExists($offset)		{	return isset($this->items[$offset]);										}
 		public function offsetUnset($offset)		{	unset($this->items[$offset]);												}
 		
-		private function get_key_index($search_key)
+		
+		private function key_search($search)
 		{
 			// array_search has problems when the values of an array are different types, so we have to do this
 			// manually.
 			foreach($this->keys as $idx => $key)
 			{
-				if($search_key === $key)
+				if($search === $key)
 				{
 					return $idx;
 				}
@@ -126,18 +131,15 @@
 			return false;
 		}
 		
+		private function get_key_index($search_key)
+		{
+			return $this->key_search($search_key);
+		}
+		
 		
 		public function key_exists($search_key)
 		{
-			foreach($this->keys as $idx => $key)
-			{
-				if($search_key === $key)
-				{
-					return (bool) $idx;
-				}
-			}
-			
-			return false;
+			return (bool) $this->key_search($search_key);
 		}
 		
 		
