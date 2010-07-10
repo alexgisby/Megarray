@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Megarray is a PHP class which aims to make dealing with Arrays even simpler and easier than it already is.
- * by tying up common functionality into a single Array class, called Megarray.
+ * Megarray adds some powerful features to PHP's arrays, including selectors and, err stuff.
  *
  * @package		Megarray
  * @author		Alex Gisby
