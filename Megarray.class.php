@@ -165,8 +165,13 @@
 				
 				// Ranges work on array-position, and not the index! That means if you have mixed keys, they are included in the
 				// range!!!
-				if(isset($this->items[$lower]))
+				if($lower <= $upper && isset($this->items[$lower]))
 				{
+					if($lower == $upper)
+					{
+						return $this->items[$lower];
+					}
+					
 					$res = new Megarray();
 					for($i = $lower; $i <= $upper; $i ++)
 					{

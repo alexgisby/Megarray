@@ -21,6 +21,12 @@
 	$result = $array['12::13'];	// Out of bounds:
 	var_dump($result);
 	
+	$result = $array['1::1'];	// Select a single element with ranges:
+	echo $result;
+	
+	$result = $array['12:1'];	// Bad range
+	echo $result;
+	
 /*	$array = new Megarray();
 	$array[0] = 'Hello';
 	$array[1] = 'World';
