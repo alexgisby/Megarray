@@ -71,7 +71,7 @@
 	echo $result;
 	
 	echo '<h2>Nasty, malformed :elements(0,2,) selector</h2>';
-	$result = $array[':elements(0,2,)'];
+	$result = $array[':elements(0,2,)'];	// Malformed elements selector? Not a problem!
 	echo $result;
 	
 	echo '<h2>Testing As Array</h2>';
