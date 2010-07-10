@@ -162,11 +162,16 @@
 				// Return the last element in the array:
 				return $this->items[$this->length - 1];
 			}
-			elseif(preg_match('/[0-9]+::[0-9]+/', $offset))
+			elseif(preg_match('/[0-9]+::([0-9]+|END)+/', $offset))
 			{
 				$range = explode('::', $offset);
 				$lower = $range[0];
 				$upper = $range[1];
+				
+				if($upper == 'END')
+				{
+					$upper = $this->length - 1;
+				}
 				
 				// Ranges work on array-position, and not the index! That means if you have mixed keys, they are included in the
 				// range!!!
@@ -182,7 +187,7 @@
 					{
 						if(isset($this->items[$i]))
 						{
-							$res[] = $this->items[$i];
+							$res[$this->keys[$i]] = $this->items[$i];
 						}
 						else
 						{

@@ -6,31 +6,56 @@
 	require_once 'Megarray.class.php';
 	
 	$array = Megarray::factory(array('elem1', 'elem2', 'elem3', 'elem4'));
-	
+	echo '<h1>Starting Array</h1>';
 	echo $array;
 	
+	echo '<h1>Range Selects</h1>';
+	
+	echo '<h2>First three elements 0::2</h2>';
 	$result = $array['0::2'];	// Grab the first three elements.
 	echo $result;
 	
+	echo '<h2>Second and third elements: 1::2</h2>';
 	$result = $array['1::2'];	// Grab the second and third elements.
 	echo $result;
 	
+	echo '<h2>Range from valid to out-of-bounds 0::12</h2>';
 	$result = $array['0::12'];	// Grab a range, but the upper is out of bounds.
 	echo $result;
 	
-	$result = $array['12::13'];	// Out of bounds:
+	echo '<h2>Out of bounds range 12::13</h2>';
+	$result = $array['12::13'];	// Out of bounds.
 	var_dump($result);
-	
-	$result = $array['1::1'];	// Select a single element with ranges:
+
+	echo '<h2>Select 1::1 range</h2>';	
+	$result = $array['1::1'];	// Select a single element with ranges.
 	echo $result;
 	
-	$result = $array['12:1'];	// Bad range
-	echo $result;
-	
+	echo '<h2>Bad Range</h2>';
+	$result = $array['12::1'];	// Bad range.
+	var_dump($result);
 	
 	// More fancy selects:
 	echo '<h2>Selecting with :last</h2>';
 	$result = $array[':last'];
+	echo $result;
+	
+	echo '<h1>Mixed Keys</h1>';
+	
+	$array = Megarray::factory(array('elem1', 'idx1' => 'string indexed element', 'Normal element again'));
+	echo '<h2>Starting array</h2>';
+	echo $array;
+	
+	echo '<h2>Select all 0::2</h2>';
+	$result = $array['0::2'];
+	echo $result;
+	
+	echo '<h2>Select from second element to the twelfth (non-existant) element</h2>';
+	$result = $array['1::12'];
+	echo $result;
+	
+	echo '<h2>Using the END parameter</h2>';
+	$result = $array['0::END'];
 	echo $result;
 	
 /*	$array = new Megarray();
