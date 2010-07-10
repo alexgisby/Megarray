@@ -69,6 +69,15 @@
 	echo '<p>This is zero indexed</p>';
 	$result = $array[':elements(0,2)'];	// Select elements 0 and 2 from the array (1st and third elements). Zero indexed.
 	echo $result;
+	
+	echo '<h2>Nasty, malformed :elements(0,2,) selector</h2>';
+	$result = $array[':elements(0,2,)'];
+	echo $result;
+	
+	echo '<h2>Testing As Array</h2>';
+	var_dump($array->as_array());
+	
+	
 
 ?>
 </pre>
