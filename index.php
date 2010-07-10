@@ -58,6 +58,20 @@
 	$result = $array['0::END'];
 	echo $result;
 	
+	echo '<h2>Grab an element by its array position :child(3)</h2>';
+	echo '<p>Important to remember that this function is 1 indexed, not zero indexed</p>';
+	$result = $array[':child(3)'];		// Selects the third element of the array, regardless of index or key type:
+	echo $result;
+	
+	echo '<h2>Grab a child element that doesn\'t exist</h2>';
+	$result = $array[':child(12)'];
+	var_dump($result);
+	
+	echo '<h2>Select certain elements of the array :elements(0,2)</h2>';
+	echo '<p>This is zero indexed</p>';
+	$result = $array[':elements(0,2)'];
+	echo $result;
+	
 /*	$array = new Megarray();
 	$array[0] = 'Hello';
 	$array[1] = 'World';

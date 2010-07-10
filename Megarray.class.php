@@ -198,6 +198,10 @@
 					return $res;
 				}
 			}
+			elseif(preg_match('/:child\((?P<idx>[0-9]+)\)/', $offset, $matches))
+			{
+				return (isset($this->items[$matches['idx']]))? $this->items[$matches['idx']-1] : null;
+			}
 			
 			return null;
 		}
