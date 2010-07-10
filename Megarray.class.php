@@ -157,6 +157,11 @@
 					return $this->items[$keypos];
 				}
 			}
+			elseif($offset === ':last')
+			{
+				// Return the last element in the array:
+				return $this->items[$this->length - 1];
+			}
 			elseif(preg_match('/[0-9]+::[0-9]+/', $offset))
 			{
 				$range = explode('::', $offset);

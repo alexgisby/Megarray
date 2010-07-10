@@ -27,6 +27,12 @@
 	$result = $array['12:1'];	// Bad range
 	echo $result;
 	
+	
+	// More fancy selects:
+	echo '<h2>Selecting with :last</h2>';
+	$result = $array[':last'];
+	echo $result;
+	
 /*	$array = new Megarray();
 	$array[0] = 'Hello';
 	$array[1] = 'World';
