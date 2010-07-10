@@ -1,10 +1,14 @@
 <?php
 
-	//
-	// Megarray is a PHP class which aims to make dealing with Arrays even simpler and easier than it already is.
-	// by tying up common functionality into a single Array class, called Megarray.
-	//
-	
+/**
+ * Megarray is a PHP class which aims to make dealing with Arrays even simpler and easier than it already is.
+ * by tying up common functionality into a single Array class, called Megarray.
+ *
+ * @package		Megarray
+ * @author		Alex Gisby
+ * @copyright	(c)2010 Alex Gisby
+ * @license		MIT License
+ */
 	class Megarray implements Countable, Iterator, ArrayAccess
 	{
 		private $position 			= 0;
@@ -14,6 +18,13 @@
 		private $original	= array();		// The original, untampered with version.
 		private $length 	= 0;
 		
+		
+		/**
+		 * Constructor, called when you do 'new Megarray();'
+		 *
+		 * @param	array 		(optional) Array to use as a base
+		 * @return 	Megarray
+		 */
 		public function __construct($arr = false)
 		{
 			if(is_array($arr))
@@ -28,12 +39,23 @@
 			}
 		}
 		
+		/**
+		 * Echoing out the array (echo $arr;) will print a debug
+		 *
+		 * @return 	string	Debug output
+		 */
 		public function __toString()
 		{
 			// Mimic print_r's functionality, loop through displaying all the elements;
 			return $this->debug(false);
 		}
 		
+		/**
+		 * Prints a human readable debug
+		 *
+		 * @param	bool	If true, debug will echo directly, if false will just return output. Default is true.
+		 * @return 	string	Debug output.
+		 */
 		public function debug($echo = true)
 		{
 			// Prints a human readable version of the array:
@@ -48,10 +70,14 @@
 			return $output;
 		}
 		
-		// Implement countable:
+		/**
+		 * Implement countable:
+		 */
 		public function count()		{		return $this->length;							}
 		
-		// Implement Iterator:
+		/**
+		 * Implement Iterator:
+		 */
 		public function rewind()	{		$this->position = 0;							}
 		public function current()	{		return $this->items[$this->position];			}	
 			
@@ -63,7 +89,9 @@
 		public function next()		{		$this->position ++;								}
 		public function valid()		{		return isset($this->items[$this->position]);	}
 		
-		// Implement Array Access:
+		/**
+		 * Implement Array Access:
+		 */
 		public function offsetSet($offset, $value)	
 		{	
 			if($this->key_exists($offset))
@@ -127,10 +155,15 @@
 		}
 		
 		
+		/**
+		 * array_search has problems when the values of an array are different types, so we have to do this manually.
+		 * Search for a key within the array and return the index or false if it doesn't exist.
+		 *
+		 * @param 	string 		search
+		 * @return 	int|bool	Index of the key, or false
+		 */
 		private function key_search($search)
 		{
-			// array_search has problems when the values of an array are different types, so we have to do this
-			// manually.
 			foreach($this->keys as $idx => $key)
 			{
 				if($search === $key)
