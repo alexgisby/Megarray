@@ -62,6 +62,17 @@
 		}
 		
 		/**
+		 * Overload the _get function to allow reading length but not writing:
+		 */
+		public function __get($key)
+		{
+			if($key == 'length')
+			{
+				return $this->length;
+			}
+		}
+		
+		/**
 		 * Prints a human readable debug
 		 *
 		 * @param	bool	If true, debug will echo directly, if false will just return output. Default is true.
@@ -201,6 +212,28 @@
 			elseif(preg_match('/:child\((?P<idx>[0-9]+)\)/', $offset, $matches))
 			{
 				return (isset($this->items[$matches['idx']]))? $this->items[$matches['idx']-1] : null;
+			}
+			elseif(preg_match('/:elements\((?P<elements>([0-9]+,?)+)\)/', $offset, $matches))
+			{
+				$elements = explode(',', $matches['elements']);
+				
+				$res = new Megarray();
+				foreach($elements as $e)
+				{
+					$e = trim($e);
+					if(isset($this->items[$e]))
+					{
+						$res[$this->keys[$e]] = $this->items[$e];
+					}
+				}
+				
+				if($res->length != 0)
+				{
+					return $res;
+				}
+				
+				// Be tidy:
+				unset($res);
 			}
 			
 			return null;
