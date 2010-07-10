@@ -5,7 +5,23 @@
 	// Megarray Demo:
 	require_once 'Megarray.class.php';
 	
-	$array = new Megarray();
+	$array = Megarray::factory(array('elem1', 'elem2', 'elem3', 'elem4'));
+	
+	echo $array;
+	
+	$result = $array['0::2'];	// Grab the first three elements.
+	echo $result;
+	
+	$result = $array['1::2'];	// Grab the second and third elements.
+	echo $result;
+	
+	$result = $array['0::12'];	// Grab a range, but the upper is out of bounds.
+	echo $result;
+	
+	$result = $array['12::13'];	// Out of bounds:
+	var_dump($result);
+	
+/*	$array = new Megarray();
 	$array[0] = 'Hello';
 	$array[1] = 'World';
 	$array['moo'] = 'Moo';
@@ -20,6 +36,9 @@
 	
 	echo $array;
 	
+	$factoried = Megarray::factory(array('elem1', 'elem2', 'elem3'));
+	echo $factoried;
+	
 	echo '<br /><br />DEFAULT BEHAVIOUR<br /><br />';
 	
 	$arr = array();
@@ -28,7 +47,7 @@
 	$arr['moo'] = 'Moo';
 	unset($arr[1]);
 	$arr[] = 'After unset';
-	print_r($arr);
+	print_r($arr);*/
 	
 /*	$array[2] = new Megarray();
 //	$array[2][0] = 'New';

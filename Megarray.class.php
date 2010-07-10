@@ -40,6 +40,17 @@
 		}
 		
 		/**
+		 * Factory method, for those who like factory pattern
+		 *
+		 * @param	array 		(optional) an array to build with as a default
+		 * @return 	Megarray	New megarray object
+		 */
+		public static function factory($arr = false)
+		{
+			return new Megarray($arr);
+		}
+		
+		/**
 		 * Echoing out the array (echo $arr;) will print a debug
 		 *
 		 * @return 	string	Debug output
@@ -128,13 +139,49 @@
 			}
 		}
 		
+		/**
+		 * This function, part of the ArrayAccess interface, does a lot of the magic of Megarray,
+		 * allows access to ranges of elements, as well as nth-child elements easily.
+		 *
+		 * @param	mixed	Offset / range to select.
+		 * @return 	mixed	Null if the key can't be found, Megarray object for ranges, or a single element from the array
+		 */
 		public function offsetGet($offset) 
 		{	
-			// Look up this key in the keys array:
-			$keypos = $this->get_key_index($offset);
-			if($keypos !== false && isset($this->items[$keypos]))
+			if(is_int($offset))
 			{
-				return $this->items[$keypos];
+				// Look up this key in the keys array:
+				$keypos = $this->get_key_index($offset);
+				if($keypos !== false && isset($this->items[$keypos]))
+				{
+					return $this->items[$keypos];
+				}
+			}
+			elseif(preg_match('/[0-9]+::[0-9]+/', $offset))
+			{
+				$range = explode('::', $offset);
+				$lower = $range[0];
+				$upper = $range[1];
+				
+				// Ranges work on array-position, and not the index! That means if you have mixed keys, they are included in the
+				// range!!!
+				if(isset($this->items[$lower]))
+				{
+					$res = new Megarray();
+					for($i = $lower; $i <= $upper; $i ++)
+					{
+						if(isset($this->items[$i]))
+						{
+							$res[] = $this->items[$i];
+						}
+						else
+						{
+							break;
+						}
+					}
+					
+					return $res;
+				}
 			}
 			
 			return null;
