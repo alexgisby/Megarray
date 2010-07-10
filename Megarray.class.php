@@ -63,6 +63,9 @@
 		
 		/**
 		 * Overload the _get function to allow reading length but not writing:
+		 *
+		 * @param 	string	The key to search with
+		 * @return 	mixed 	The property.
 		 */
 		public function __get($key)
 		{
@@ -71,6 +74,17 @@
 				return $this->length;
 			}
 		}
+		
+		/**
+		 * Return the Megarray as a normal array object
+		 *
+		 * @return 	array 	The Megarray as an array
+		 */
+		public function as_array()
+		{
+			return $this->original;
+		}
+		
 		
 		/**
 		 * Prints a human readable debug
