@@ -77,6 +77,18 @@
 	echo '<h2>Testing As Array</h2>';
 	var_dump($array->as_array());
 	
+	echo '<h1>Sorting Tests</h1>';
+	
+	$array = new Megarray(array(2, 5, 6, 1, 2));
+	
+	echo '<h2>Sort ascending</h2>';
+	$array->sort_asc();
+	echo $array;
+	
+	echo '<h2>Sort Descending</h2>';
+	$array->sort_desc();
+	echo $array;
+	
 	
 
 ?>

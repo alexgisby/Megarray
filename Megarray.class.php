@@ -266,6 +266,52 @@
 			$this->length --;
 		}
 		
+		/**
+		 * -------------------- Sorting functions -----------------------
+		 */
+		
+		/**
+		 * Sorts the array in ascending order.
+		 *
+		 * @param 	bool 	If true return the result rather than sorting the current array (default false)
+		 * @return 	Megarray
+		 */
+		public function sort_asc($return = false)
+		{
+			if($return)
+			{
+				$ret = new Megarray($this->as_array());
+				$ret->sort_asc();
+				return $ret;
+			}
+			else
+			{
+				sort($this->original);
+				return $this;
+			}
+		}
+		
+		/**
+		 * Sorts the array in descending order
+		 *
+		 * @param 	bool 	If true return the result rather than sorting the current array (default false)
+		 * @return 	Megarray
+		 */
+		public function sort_desc($return = false)
+		{
+			if($return)
+			{
+				$ret = new Megarray($this->as_array());
+				$ret->sort_desc();
+				return $ret;
+			}
+			else
+			{
+				rsort($this->original);
+				return $this;
+			}
+		}
+		
 		
 		/**
 		 * array_search has problems when the values of an array are different types, so we have to do this manually.
